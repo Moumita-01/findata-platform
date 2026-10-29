@@ -1,0 +1,15 @@
+services:
+  oracle:
+    image: gvenzl/oracle-free:slim
+    container_name: findata-oracle
+    ports:
+      - "1521:1521"
+    environment:
+      ORACLE_PASSWORD: YourStrongPass123
+      APP_USER: findata
+      APP_USER_PASSWORD: FinData123
+    volumes:
+      - oracle_data:/opt/oracle/oradata
+
+volumes:
+  oracle_data:
