@@ -50,3 +50,22 @@ CREATE TABLE securities (
     currency       VARCHAR2(3),
     sector         VARCHAR2(50)
 );
+
+
+CREATE TABLE transactions (
+    txn_id        NUMBER NOT NULL,
+    account_id    NUMBER NOT NULL,
+    security_id   NUMBER,
+    txn_type      VARCHAR2(20),
+    amount        NUMBER(18,2),
+    quantity      NUMBER(18,4),
+    currency      VARCHAR2(3),
+    txn_date      DATE NOT NULL,
+    status        VARCHAR2(15),
+    created_at    DATE DEFAULT SYSDATE
+)
+PARTITION BY RANGE (txn_date)
+INTERVAL (NUMTOYMINTERVAL(1, 'MONTH'))
+(
+    PARTITION p_initial VALUES LESS THAN (DATE '2022-01-01')
+);
